@@ -1,0 +1,30 @@
+Update notes remaining characters label after pasting large text from clipboard
+Increase build number — don't know why they're different…
+Added more replacements for ASCII notes field: dashes and angle quotes
+Limit notes to 500 characters (close #421)
+Fixed sporadic missing color info for expanded category list #419
+Updated section header spacing #418
+Updated shading of Deals section header for #417
+Updated character conversion logic to allow pasting in text before converting to 255 bit ASCII. Removed fancy quotes and smart dashes from text view
+Updated text conversion logic for #414 - more descriptive error messages and fixed extended ascii symbols disappearing without an alert
+Added section header to deals list for #417
+Fixed #414 - entering apostrophe ' , fixed enter key, selecting keyboard suggestions, text insertion and copy paste for the order comment text view
+Fixed being unable to enter quotation marks for #414
+Restricting input to ASCII-127, updated error alert to display single incorrect character. Stripping ascii 255 symbols when entered
+Fix for non-ascii input #414 and text field truncation #415
+Attempting to fix crash due to configuring invalid cell #416
+Updated height of the comment box for order details #413
+WIP - Enhancements to order instructions text view for #413
+Added salon selector on first login as sales rep #412
+Removed "In Development" message for Salon Owner #412
+WIP #412 - updating side menu, added salon selector to side menu
+WIP on implementing salon selection for Salon Owner for #412
+Replaced price loading placeholder to $ for #410
+Prototype work on #403 - shipping address selector for sales rep manager
+Removed async price fetch for items in shopping cart and distributor order #410 - waiting for backend update to the shopping cart
+Removed async loading of sub item prices for #410
+Implemented batch price fetch for #410 . Displaying placeholder instead of item price while loading. Removed obsolete price key from Item
+Fixed being unable to completely clear order notes for #350 when going back to the shopping cart screen from place order screen
+Added subtotals for checkout order confirmation screen and order detail for #374
+Updated quantity selector layout to prevent taps on item cell when changing quantity for #312
+Clearing item price cache on logout or salon change for #405

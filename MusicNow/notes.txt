@@ -1,0 +1,30 @@
+New battery level label
+Added "user_videos" persmission
+Enable iOS audio processing for build-in mic with not adjustable levels
+Display battery level while streaming
+1.4.8 (55)
+Filter out archived cameras during live stream
+Logging in production
+1.4.8 (54)
+Focusing by tapping on the screen
+Give some time for the stream buffer to upload to the video server
+Sent firebase token when logged in for the first time
+Avoid creating concurrent RTMP streams upon reconnect
+Logging
+Version 1.4.7 (53)
+Lower WiFi maximum bitrate
+Version 1.4.6 (52)
+Loader on facebook page selection button
+COCOAPODS_PARALLEL_CODE_SIGN
+Right permissions
+Fix typo #2
+Fix typo
+Pass Facebook Page access token
+Continue as regular facebook user
+Update user's Facebook Page in profile
+Select Facebook Page at initial profile setup
+Ask for pages_show_list permission
+Display app version in endpoint action sheet
+Logging
+Version 1.4.5 (51)
+Support for landscape on iPad o_O

@@ -1,0 +1,30 @@
+Experiments on approximating speed graphs
+Design changes: dark theme
+File sharing enabled to download tracks (and upload, in the future)
+Some design changes
+Average graph points
+Refactor Track to two files
+Fix format
+Always save track on state changes
+Open Activity View from tracks for active tracks
+Date formatting locale
+Optimized graphs
+iOS 9 support =\
+Some info on Track View
+UI experiments
+Fix graph warnings when range is 0
+Ignore bad locations
+Provisioning
+Icon
+Warning fix
+Monospaced digit fonts
+Graph
+Locate button
+Fix distance computing
+Deleting tracks
+Workaround for Mapbox tracking issue
+Stop location manager when not needed in background
+Outdoor style for Track View
+Formatter fix
+Track view stub
+Saving/loading tracks

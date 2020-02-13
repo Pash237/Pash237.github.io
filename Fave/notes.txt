@@ -1,0 +1,30 @@
+Close opened cells
+customerscores.com → faveme.com everywhere else
+customerscores.com → faveme.com
+Version 2.3 (24)
+Possibly fix misterious bug where accept/send buttons won't hide after redeem
+Fix loader on buttons won't show up sometimes
+Version  2.3 (23)
+Provisioning (close #12)
+Change button (close #10)
+Urgly linebreak
+Display gift redeem errors
+Code for sending push notification receipts (close #9)
+Share Fave via SMS button
+Extra escaping
+Linebreaks in tutorial
+Go home after sending business card
+Bring back Foursquare Places screen (but it's dump now!)
+Fix menu actions
+Don't allow to redeem zero gifts (fix #4)
+Tutorial screens (close #7)
+Remove Add Place functionality, change screen-flow (close #6)
+Change facebook sharing text (close #8)
+Provisioning, Xcode changes
+cave@faveme.com email for business cards
+Sending business card photo
+New Facebook texts
+Xcode update changes
+Some old changes
+New Facebook App ID
+Version 2.2 (20)

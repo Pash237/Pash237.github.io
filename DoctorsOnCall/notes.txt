@@ -1,0 +1,30 @@
+Fix autolayout warnings
+Image for chat button instead of “Chat” title (#43)
+Remove gallery, add chat button (TODO: get chat id from call response!), #43
+Display incoming photo on the doctor call screen (close #42)
+Fix top offset on iOS 11 on doctor call screen
+Fix status bar color on doctor call screen
+Replace “snapshot” deprecated signal with “attachment”
+One more hack for chat scrolling :(
+Support thumbnails
+Hot fix for chat auto scrolling
+Update cocoapods
+Hot fix for keyboard inset issue
+Try to fix insets on iOS 11 in chat scroll view
+Blue color for user's messages in chat
+Allow taking videos with camera
+Fix chat sometimes won't scroll to bottom
+Sending videos
+Video playback in chat
+VideoView (not used really…)
+Workaround for pop/push view controller animaton (rdar://34465226)
+Limit names to single line
+Display and open attachments in chat
+Call events in chat
+Fix chat scrolling with only few messages
+Retry failed messages (close #41)
+Immediately show chat messages (close #40)
+Align images left
+Image loading indicator in chat
+Sending photos from chat
+Hide keyboard when AlertView appears

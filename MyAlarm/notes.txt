@@ -1,0 +1,30 @@
+Increase version
+Crashlytics
+Update script to take localizations from Firebase
+Some more possible replacements for localization import
+Another try on git ssh
+One more try on android repo checkout
+Localization script: other way of checking out android repo
+Localization script to take localizations from Android repository
+Set Ad Hoc provisioning
+Google-translated localization for "en" and "es"
+Possibly fix line wrapping issue
+Remove branded applications
+Some localization issues
+Remove redundant string
+Draft localization support
+Limit user details text to two lines (close #184)
+Serial queue for requests that must not be concurrent (close #182)
+Remove automatic check for user access for object parts (see #128)
+Workaround for issue with access to object parts, close #173, see #128
+Fix issue when push notification settings get overwriten by object/preferences response (close #182)
+Additional NETWORK_LOGS switch
+Don't grayscale avatar for current user
+Reload object and user after invite/revoke (close #177)
+Grayscale avatars for non-invited users (#179)
+Display gray mask above not invited users (close #179)
+Compare using, taking “none” role in account (close #178)
+Fix line wrapping on application user settings screen
+Change users list title based on whether it shows all users or only administrators (#172)
+Display phone number for non-admin user when object doesn't have any parts (close #176)
+One more workaround for object part access issue (see #128)

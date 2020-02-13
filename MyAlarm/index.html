@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>		
+		<!-- -->
+		<!-- new builds service -->
+		<!-- -->
+		<meta http-equiv="refresh" content="0; url=http://00b.in/builds/MyAlarm" />
+		<!-- -->
+		<!-- -->
+		<!-- -->
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<script src="csi.min.js"></script>
+		<title>MyAlarm</title>
+		<style type="text/css">
+		body {
+			font-family: "PT Sans", Helvetica, sans-serif;
+			margin-top: 30px;
+		}
+		a:link, a:visited, a:hover, a.active {
+		    text-decoration: none;
+		}
+
+		.install-button
+		{
+			text-decoration: none;
+			padding-top: 7px;
+			padding-right: 12px;
+			padding-bottom: 7px;
+			padding-left: 12px;
+			color: #404040;
+			text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+			white-space: nowrap;
+			vertical-align: middle;
+			cursor: pointer;
+			background-color: #eee;
+			background-image: -webkit-linear-gradient(#fcfcfc, #eee);
+			background-image: linear-gradient(#fcfcfc, #eee);
+			background-repeat: repeat-x;
+			border: 1px solid #d5d5d5;
+			border-radius: 3px;
+		}
+		.center {
+		    text-align: center;
+		     width: 100%;
+		}
+		.notes {
+			white-space: pre-wrap;
+			word-break: break-all;
+			font-family: "PT Sans", Helvetica, sans-serif;
+			width: 300px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		#post-install-block {
+			display: none;
+		}
+		</style>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			function onInstallButtonClick() {
+				document.getElementById("install-button").style.display = 'none';
+				document.getElementById("post-install-block").style.display = 'block';
+			}
+		</script>
+		<div class="center">
+			<a href="itms-services://?action=download-manifest&url=https://pash237.github.io/MyAlarm/install.plist" onclick="onInstallButtonClick(); return true;">
+			<img src="icon.png" width="90" height="90"><br><br><span id="install-button" class="install-button">Install MyAlarm<span></a><br><br>
+			<p id="post-install-block">Confirm install, press “Home” button and wait for the app to install</p>
+			<span style="font-size: 10pt; color:#a0a0a0;">Version <div data-include="date.txt"></div></span>
+		</div>
+		<pre class="notes"><div data-include="notes.txt"></div></pre>
+		<div class="center">
+			<a href="https://pash237.github.io/MyAlarm/MyAlarm.ipa">Download .ipa</a>
+			<br><br>
+		</div>
+	</body>
+</html>

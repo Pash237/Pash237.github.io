@@ -1,0 +1,30 @@
+Provisioning – add another iPad
+Provisioning
+Restrict orientation to portrait
+Fix stubs might not work with changed domain
+Fix crash on task list
+/photos → /photo
+Reopen archived tasks (close #39)
+Collapse space for photos when there are no photos
+Task ATM photos (close #40)
+Fix directions container won't hide when location unavailable
+Stubs for /photos request
+Add possibility to log out from debug settings even on backend errors
+More ways to access settings
+Add secret gesture on device register screen
+Fix registering device
+Launch screen
+Device registration (close #7)
+Hide directions on archived tasks (close #38)
+Use real ATM coordinates from server
+Fix error appearance
+Specify minimum button width for alert view
+Message about shift change delay after entering phone number (close #36)
+Fix possible crash
+Use yandex.maps if yandex.navigator is not installed
+Cache estimated direcrtions (close #37)
+Estimated time and duration via Apple MapKit
+Code signing
+Fix crash in demo-mode
+Open route in Yandex.Navigator
+More user friendly 403 error
