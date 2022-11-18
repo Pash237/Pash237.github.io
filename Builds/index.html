@@ -151,12 +151,13 @@
 		function onInstallButtonClick() {
 			document.getElementById("install-button").style.display = 'none';
 			document.getElementById("title").style.display = 'none';
+			document.getElementById("logo").style.display = 'none';
 			document.getElementById("post-install-block").style.display = 'block';
 		}
 	</script>
 	<div id="main" class="horizontal-center">
 		<h1 class="title"><img id="logo" class="logo"/><br><span id="title"></span></h1>
-		<a id="download-link" href="itms-services://?action=download-manifest&url=https://stratus-chat.appspot.com/builds/{%% PLIST_NAME %%}/install.plist" onclick="onInstallButtonClick(); return true;">
+		<a id="download-link" href="" onclick="onInstallButtonClick(); return true;">
 			<span id="install-button" class="button">Install</span>
 		</a><br>
 		<span id="post-install-block" class="message-block">Confirm install, press “Home” button and wait for the app to install.</span>
@@ -203,6 +204,8 @@
 			const title = valueInPlist(plist, "CFBundleDisplayName")
 			document.title = title
 			document.getElementById("title").innerHTML = title
+			
+			document.getElementById("download-link").href = "itms-services://?action=download-manifest&url=" + encodeURIComponent(manifestUrl(plist));
 		}
 
 		function pathFor(fileName) {
@@ -280,6 +283,19 @@
 				document.getElementById("install-button").style.boxShadow = '0 4px ' + darker;
 				document.getElementById("install-button").style.color = swatches.Vibrant.getTitleTextColor();
 			});
+		}
+		
+		function manifestUrl(plist) {
+			const bundleId = valueInPlist(plist, "CFBundleIdentifier")
+			const shortVersion = valueInPlist(plist, "CFBundleShortVersionString")
+			const title = valueInPlist(plist, "CFBundleDisplayName")
+			
+			var url = "https://makerequest.com/echo?data=%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%3C!DOCTYPE%20plist%20PUBLIC%20%22-%2F%2FApple%2F%2FDTD%20PLIST%201.0%2F%2FEN%22%20%22http%3A%2F%2Fwww.apple.com%2FDTDs%2FPropertyList-1.0.dtd%22%3E%3Cplist%20version%3D%221.0%22%3E%3Cdict%3E%3Ckey%3Eitems%3C%2Fkey%3E%3Carray%3E%3Cdict%3E%3Ckey%3Eassets%3C%2Fkey%3E%3Carray%3E%3Cdict%3E%3Ckey%3Ekind%3C%2Fkey%3E%3Cstring%3Esoftware-package%3C%2Fstring%3E%3Ckey%3Eurl%3C%2Fkey%3E%3Cstring%3Ehttps%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fbuild-storage-project.appspot.com%2Fo%2FIPA_NAME.ipa%3Falt%3Dmedia%3C%2Fstring%3E%3C%2Fdict%3E%3Cdict%3E%3Ckey%3Ekind%3C%2Fkey%3E%3Cstring%3Edisplay-image%3C%2Fstring%3E%3Ckey%3Eurl%3C%2Fkey%3E%3Cstring%3E%3C%2Fstring%3E%3C%2Fdict%3E%3Cdict%3E%3Ckey%3Ekind%3C%2Fkey%3E%3Cstring%3Efull-size-image%3C%2Fstring%3E%3Ckey%3Eurl%3C%2Fkey%3E%3Cstring%3E%3C%2Fstring%3E%3C%2Fdict%3E%3C%2Farray%3E%3Ckey%3Emetadata%3C%2Fkey%3E%3Cdict%3E%3Ckey%3Ebundle-identifier%3C%2Fkey%3E%3Cstring%3EBUNDLE_ID%3C%2Fstring%3E%3Ckey%3Ebundle-version%3C%2Fkey%3E%3Cstring%3EVERSION%3C%2Fstring%3E%3Ckey%3Ekind%3C%2Fkey%3E%3Cstring%3Esoftware%3C%2Fstring%3E%3Ckey%3Etitle%3C%2Fkey%3E%3Cstring%3ETITLE%3C%2Fstring%3E%3C%2Fdict%3E%3C%2Fdict%3E%3C%2Farray%3E%3C%2Fdict%3E%3C%2Fplist%3E&headers=Content-Type:application/xml";
+			url = url.replaceAll("IPA_NAME", encodeURIComponent(encodeURIComponent(buildName)));
+			url = url.replaceAll("BUNDLE_ID", bundleId);
+			url = url.replaceAll("VERSION", shortVersion);
+			url = url.replaceAll("TITLE", encodeURIComponent(title));
+			return url
 		}
 	</script>
 </body>
