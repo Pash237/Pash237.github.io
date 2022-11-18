@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width" />
+	<title></title>
+	<!-- <link rel="apple-touch-icon" sizes="180x180" href="{%% LOGO_URL %%}">
+	<link rel="icon" type="image/png" href="{%% LOGO_URL %%}"> -->
+	<style type="text/css">
+		body {
+			font-family: "PT Sans", Helvetica, sans-serif;
+			margin-top: 30px;
+		}
+		a:link, a:visited, a:hover, a.active {
+			text-decoration: none;
+		}
+		hr {
+			border: 0;
+			height: 1px;
+			background: #C1C5C7;
+			margin-top: 12px;
+			margin-bottom: 12px;
+		}
+		
+		.version-tag {
+			margin-bottom: 0px;
+			font-size: 24px;
+		}
+		
+		.button {
+			padding: 15px 50px;
+			font-size: 24px;
+			text-align: center;
+			cursor: pointer;
+			outline: none;
+			color: #fff;
+			background-color: #C1C5C7;
+			border: none;
+			border-radius: 5px;
+			box-shadow: 0 4px #868889;
+			transition: all .1s ease;
+			display: inline-block;
+			text-decoration: none;
+			overflow: hidden;
+			white-space: nowrap;
+			
+			position: absolute;
+			top: 57%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		
+		.button:active {
+			background-color: #C8CDCF;
+			box-shadow: 0 2px #868889;
+			transform: translate(-50%, -50%) translateY(2px);
+			transition: all .1s ease;
+			color: #fff;
+		}
+		
+		.horizontal-center {
+			text-align: center;
+			width: 100%;
+		}
+		.center {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			min-height: 100vh;
+		}
+		.title {
+			position: absolute;
+			top: 15%;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+			color: #3A3A3A;
+		}
+		.details {
+			position: absolute;
+			top:78%;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+			
+			font-size: 11pt;
+			color:#a0a0a0;
+		}
+		.branches {
+			position: absolute;
+			top: 66%;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+			color: #3A3A3A;
+		}
+		
+		.changelog {
+			position: absolute;
+			top: 90%;
+			
+			padding-left: 6%;
+			padding-right: 6%;
+			margin-bottom: 20px;
+			text-align: left;
+			
+			font-size: 11pt;
+			color: #3A3A3A;
+		}
+		
+		#post-install-block {
+			display: none;
+		}
+		
+		.message-block {
+			margin-bottom: 16px;
+			margin-top: 0px;
+			padding-left: 30px;
+			padding-right: 30px;
+			color: #3A3A3A;
+			font-size: 20px;
+		}
+		
+		#build_date {
+			display: inline-block;
+			margin: 5px;
+		}
+		
+		.logo {
+			margin-bottom: 20px;
+			max-height: 15%;
+			border-radius: 5px;
+			background-color: #c0c0c0;
+		}
+		
+		#install-button {
+			
+		}
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" type="text/javascript"></script>
+	<script src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+	<script type="text/javascript">
+		function onInstallButtonClick() {
+			document.getElementById("install-button").style.display = 'none';
+			document.getElementById("title").style.display = 'none';
+			document.getElementById("post-install-block").style.display = 'block';
+		}
+	</script>
+	<div class="horizontal-center">
+		<h1 class="title"><img id="logo" class="logo"/><br><span id="title"></span></h1>
+		<a id="download-link" href="itms-services://?action=download-manifest&url=https://stratus-chat.appspot.com/builds/{%% PLIST_NAME %%}/install.plist" onclick="onInstallButtonClick(); return true;">
+			<span id="install-button" class="button">Install</span>
+		</a><br>
+		<span id="post-install-block" class="message-block">Confirm install, press “Home” button and wait for the app to install.</span>
+		
+		<!-- <div class="branches">
+			{%% BRANCHES %%}
+		</div> -->
+		
+		<div class="details">
+			<span id="build_version"></span><br>
+			<span id="build_date"></span>
+		</div>
+		
+		<div id="changelog-container" class="center">
+			<div class="changelog">
+				<hr id="changelog_separator"/>
+				<span id="changelog"></span>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		const urlParams = new URLSearchParams(window.location.search)
+		const buildName = urlParams.get("build")
+		const showChangelogOnly = urlParams.get("changelog")
+
+		async function parsePlist() {
+			const response = await fetch(pathFor(buildName + ".plist"));
+			buildDate = response.headers.get('Last-Modified');
+			moment.updateLocale(moment.locale(), { invalidDate: "" })
+			document.getElementById("build_date").innerHTML = moment(buildDate).fromNow()
+
+			const plist = await response.text()
+
+			const shortVersion = valueInPlist(plist, "CFBundleShortVersionString")
+			const bundleVersion = valueInPlist(plist, "CFBundleVersion")
+			document.getElementById("build_version").innerHTML = shortVersion + " (" + bundleVersion + ")"
+
+			const title = valueInPlist(plist, "CFBundleDisplayName")
+			document.title = title
+			document.getElementById("title").innerHTML = title
+		}
+
+		function pathFor(fileName) {
+			return "https://firebasestorage.googleapis.com/v0/b/build-storage-project.appspot.com/o/" + encodeURIComponent(fileName) + "?alt=media&token=8226588c-f604-4a4b-aec6-f61193b14318"
+		}
+
+		function valueInPlist(plist, key) {
+			const regex = new RegExp(key + "</key>[\\s\\S]*?<string>(.*?)</string>", "g")
+			return regex.exec(plist)[1]
+		}
+
+		async function getChangelog(filterOut) {
+			const response = await fetch(pathFor(buildName + ".changelog"))
+			var changelog = await response.text()
+
+			if (filterOut) {
+				for (var term of filter_out.split(",")) {
+					changelog = changelog.replaceAll(/^.*?{}.*?\n/ig, "")
+				}
+			}
+
+			// version tags
+			changelog = changelog.replaceAll(/\n([0-9.]{3,12}?)-(\(.{1,5}?\))\n/g, "<p class='version-tag'>$1 $2</p>\n")
+			changelog = changelog.replaceAll(/\n([0-9.]{3,12}?)\n/g, "<p class='version-tag'>$1</p>\n")
+
+			changelog = changelog.replaceAll(/(.*? \| )(.*)\n/g, "<span style='color: #d0d0d0'>$1</span><span>$2</span>\n")
+
+			changelog = changelog.replaceAll(/([A-Z]{2,10}?-\d{1,4})/g, "<a href='https://arcturus-star.atlassian.net/browse/$1'>$1</a>")
+
+			changelog = changelog.replaceAll("\n", "<br>\n")
+
+			document.getElementById("changelog").innerHTML = changelog
+		}
+
+		if (!showChangelogOnly) {
+			parsePlist();
+
+			document.getElementById("logo").src = pathFor(buildName + ".png")
+			var img = document.getElementById("logo");
+			img.addEventListener('load', setButtonColor);
+			setButtonColor();
+		}
+		
+		getChangelog();
+
+		var isIOS = /iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+		if (!isIOS) {
+			document.getElementById("post-install-block").innerHTML = "To install application open this page on your iOS device.";
+			document.getElementById("post-install-block").style.display = 'block';
+			document.getElementById("download-link").href = "https://firebasestorage.googleapis.com/v0/b/build-storage-project.appspot.com/o/" + encodeURIComponent(buildName) + ".ipa?alt=media"
+			document.getElementById("install-button").innerHTML = "Download .ipa"
+		}
+
+		if (showChangelogOnly) {
+			document.getElementById("install-button").style.display = 'none';
+			document.getElementById("title").style.display = 'none';
+			document.getElementById("post-install-block").style.display = 'none';
+			document.getElementById("logo").style.display = 'none';
+			document.getElementById("download-link").style.display = 'none';
+			document.getElementById("build_version").style.display = 'none';
+			document.getElementById("build_date").style.display = 'none';
+			document.getElementById("changelog_separator").style.display = 'none';
+			document.getElementsByClassName("changelog")[0].style.position = 'inherit';
+			document.getElementsByClassName("changelog")[0].style.top = '0%';
+		}
+		
+		function setButtonColor() {
+			img.crossOrigin = "Anonymous";
+			Vibrant.from(img).getPalette().then(function(swatches) {
+				document.getElementById("install-button").style.backgroundColor = swatches.Vibrant.getHex();
+				const darker = Vibrant.Util.rgbToHex(swatches.DarkVibrant.rgb[0]*0.6, swatches.DarkVibrant.rgb[1]*0.6, swatches.DarkVibrant.rgb[2]*0.6)
+				document.getElementById("install-button").style.boxShadow = '0 4px ' + darker;
+				document.getElementById("install-button").style.color = swatches.Vibrant.getTitleTextColor();
+			});
+		}
+	</script>
+</body>
+</html>
